@@ -18,9 +18,9 @@ const logout = async () => {
     <q-toolbar class="GNL__toolbar">
       <q-btn dense flat round icon="menu" @click="appstore.toggleVisibleMenu"/>
       <q-btn href="/" title="На главную" flat no-caps no-wrap class="q-ml-none q-pl-none app-logo" v-if="$q.screen.gt.xs">
-          <img alt="Название сервиса" src="~/cism-front-base/src/assets/images/logo_invert.svg" />
+          <img alt="Менеджер задач" src="~/cism-front-base/src/assets/images/logo_back.svg" />
           <q-toolbar-title shrink class="q-ml-none q-pl-none app-logo-title">
-            Название сервиса
+            Менеджер задач
           </q-toolbar-title>
         </q-btn>
       <q-space />

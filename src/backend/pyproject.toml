@@ -35,6 +35,7 @@ pydantic-core = "2.20.1"
 annotated-types = "0.7.0"
 cism-python-utils = "^1.0.0"
 cryptography = "40.0.2"
+mypy = "^1.15.0"
 
 [tool.poetry.group.prod.dependencies]
 

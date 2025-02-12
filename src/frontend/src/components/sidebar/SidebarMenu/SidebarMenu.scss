@@ -1,0 +1,34 @@
+.GNL {
+  &__drawer-item {
+    line-height: 24px;
+    .q-item__section--avatar {
+      .q-icon {
+        color: #000000;
+      }
+    }
+
+    .q-item__label {
+      color: #000000;
+      letter-spacing: .01785714em;
+      font-size: .875rem;
+      font-weight: 500;
+      line-height: 1.25rem;
+    }
+
+    &__drawer-footer-link {
+      color: inherit;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: .75rem;
+
+      &:hover {
+        color: #000000;
+      }
+    }
+  }
+}
+
+.q-item {
+  border-radius: 8px;
+  margin: 8px;
+}

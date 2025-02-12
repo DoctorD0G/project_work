@@ -1,0 +1,14 @@
+.error-page {
+  &__detail {
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    max-width: 540px;
+    margin-bottom: 44px;
+  }
+
+  &__number {
+    font-size: 84px;
+    margin-bottom: 44px;
+  }
+}

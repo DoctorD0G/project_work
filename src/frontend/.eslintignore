@@ -1,0 +1,7 @@
+node_modules/
+dist/
+/.quasar
+/src/ui-components.d.ts
+babel.config.js
+.prettierrc.js
+.eslintrc.js

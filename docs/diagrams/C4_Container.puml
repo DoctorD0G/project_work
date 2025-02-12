@@ -1,0 +1,42 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+
+'icons
+!define ICONURL https://raw.githubusercontent.com/tupadr3/plantuml-icon-font-sprites/v2.4.0
+!includeurl ICONURL/devicons2/postgresql.puml
+!includeurl ICONURL/devicons2/mongodb_wordmark.puml
+!includeurl ICONURL/devicons2/redis.puml
+!includeurl ICONURL/devicons2/python.puml
+!includeurl ICONURL/font-awesome-5/telegram.puml
+!includeurl ICONURL/font-awesome-5/file.puml
+
+
+!define SPRITESURL https://raw.githubusercontent.com/plantuml-stdlib/gilbarbara-plantuml-sprites/v1.1/sprites
+!includeurl SPRITESURL/rabbitmq.puml
+!includeurl SPRITESURL/aws-s3.puml
+
+LAYOUT_LANDSCAPE()
+
+Person(manager, "Менеджер", "Управление, мониторинг")
+SystemQueue(message_broker, "Брокер сообщений", "Задачи поступающие в сервис", $sprite="rabbitmq")
+
+Container_Boundary(app, "App Name") {
+    Container(web_service, "Веб сервис", "uvicorn, fastapi, python 3.10", "Интерфейс для работы с сервисом", $sprite="python")
+    Container(beat_tasks_beat, "Планировщик периодических задач", "celery, python 3.10", "Создание периодических задач согласно настройкам", $sprite="python")
+    Container(background_workers, "Фоновые задачи", "celery, python 3.10", "Выполнение фоновых задач", $sprite="python")
+
+    ContainerDb(app_db, "Хранилище данных", "Postgresql", "", $sprite="postgresql")
+    SystemQueue(task_broker, "Брокер сообщений", "Хранилище фоновых, периодических задач", $sprite="rabbitmq")
+
+    Rel(web_service, app_db, "")
+    Rel(background_workers, app_db, "")
+    Rel(web_service, task_broker, "")
+    Rel(beat_tasks_beat, task_broker, "")
+    Rel(task_broker, background_workers, "")
+
+}
+
+Rel(manager, web_service, "Управление", "RestAPI", "HTTP")
+Rel(message_broker, background_workers, "Задачи", "", "AMQP")
+
+@enduml

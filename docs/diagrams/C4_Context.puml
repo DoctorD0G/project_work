@@ -1,0 +1,15 @@
+@startuml
+!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+
+
+LAYOUT_LANDSCAPE()
+
+Person(manager, "Менеджер", "Управление, мониторинг")
+SystemQueue(message_broker, "Брокер сообщений", "Задачи поступающие в сервис")
+
+System(app, "App Name", "Описание основного функционального назначения сервиса", "", "", "", "")
+
+Rel(manager, app, "Управление", "", "")
+Rel(message_broker, app, "Задачи", "", "")
+
+@enduml

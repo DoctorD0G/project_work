@@ -1,0 +1,5 @@
+node_modules/
+dist/
+/.quasar
+/src/ui-components.d.ts
+.prettierrc.js

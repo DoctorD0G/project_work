@@ -1,0 +1,27 @@
+.auth-page {
+  width: 100%;
+  max-width: 450px;
+
+  &__title-logo{
+    text-align: center;
+    padding-top: 20px;
+    img{
+      max-width: 120px;
+    }
+  }
+
+  &__title {
+    text-align: center;
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 0 50px 0 50px;
+    align-self: center;
+  }
+}

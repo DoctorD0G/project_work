@@ -1,0 +1,35 @@
+#add hosts app1.local.ru, app2.local.ru
+version: '3.5'
+services:
+  
+  app_server1_front:
+    build:
+      context: ../../
+      dockerfile: ./devops/Dockerfile.front
+      args:
+        DEV_ENV: true
+    restart: unless-stopped
+    container_name: app_server1_front
+    env_file: .env.app1.front
+    ports:
+      - "80:80"
+    networks:
+      - proxy-network
+
+  app_server1_back:
+    build:
+      context: ../../
+      dockerfile: ./devops/Dockerfile.back
+      args:
+        DEV_ENV: true
+    restart: unless-stopped
+    container_name: app_server1_back
+    env_file: .env.app1.back
+    ports:
+      - "8080:5000"
+    networks:
+      - proxy-network
+
+
+networks:
+  proxy-network: { }

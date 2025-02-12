@@ -1,0 +1,27 @@
+FROM hub.cism-ms.ru/library/node:18-alpine3.18  as srcfront
+
+WORKDIR /opt/frontend
+
+COPY src/frontend .
+RUN rm -rf /opt/frontend/.env
+
+RUN apk add --no-cache git
+
+RUN yarn install
+RUN yarn build
+
+
+FROM hub.cism-ms.ru/library/nginx:1.25.4-alpine as front
+COPY --from=srcfront /opt/frontend/dist /usr/share/nginx/html
+
+RUN apk add --no-cache tzdata
+ENV TZ=Europe/Moscow
+RUN cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime
+
+COPY devops/conf/nginx/default.conf /etc/nginx/conf.d/
+
+COPY devops/scripts /opt/scripts
+RUN chmod +x /opt/scripts/*.sh; sync;
+
+EXPOSE 80
+CMD /opt/scripts/run_frontend.sh
